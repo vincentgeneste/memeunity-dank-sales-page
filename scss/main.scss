@@ -21,10 +21,10 @@ $dark-purple: #452057;
 $phantasma-blue: #17b1e8;
 $transparent-purple: rgba($memeunity-purple, 0.8);
 
-$mobile: 600px;
+$mobile: 500px;
 $desktop: 15000px;
 $tablet: 1024px;
-$small-mobile: 380px;
+$small-mobile: 320px;
 $small-tablet: 700px;
 $small-desktop: 1440px;
 
@@ -43,6 +43,23 @@ $badass: #bada55;
 
 .text-font {
   font-family: "Open Sans", sans-serif;
+}
+
+.all-containing-container {
+  box-sizing: border-box;
+  min-width: 100%;
+  @include breakpoint(0) {
+    padding: 0 1em;
+  }
+  @include breakpoint($mobile) {
+    padding: 0 5em;
+  }
+  @include breakpoint($tablet) {
+    padding: 0 4em;
+  }
+  @include breakpoint(1200px) {
+    padding: 0 8em;
+  }
 }
 
 .main-logo {
@@ -110,23 +127,19 @@ nav.main {
   margin-left: 1em;
   transition: 350ms;
   &:hover {
-    font-size: 1.5em;
+    background-color: $memeunity-purple;
+    color: $memeunity-white;
     transition: 350ms;
   }
-}
-
-.all-containing-container {
-  box-sizing: border-box;
-  min-width: 100%;
-  @include breakpoint(0) {
-    padding: 0 3em;
+  &:active {
+    background-color: darken($memeunity-purple, 10);
+    color: $memeunity-white;
+    transition: 150ms;
   }
-  @include breakpoint($tablet) {
-    padding: 0 4em;
-  }
-  @include breakpoint(1200px) {
-    padding: 0 8em;
-  }
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
 
 .landing-hero {
@@ -213,7 +226,7 @@ nav.main {
     width: 20em;
   }
   @include breakpoint($mobile) {
-    width: 30em;
+    width: 100%;
   }
   @include breakpoint($tablet) {
     width: 40em;
@@ -259,7 +272,7 @@ nav.main {
     }
     @include breakpoint($mobile) {
       min-width: 0;
-      max-width: 70%;
+      max-width: 100%;
     }
     @include breakpoint($tablet) {
       flex-direction: row;
@@ -333,7 +346,7 @@ nav.main {
   background-color: lighten($carpet-blue, 10);
   border-radius: 1em;
   border-color: rgba($memeunity-white, 0.8);
-  margin-top: 10px;
+  margin-top: 1.2em;
   margin-bottom: 10px;
   margin-right: 0;
   padding: 0.3em 1em 0.3em 1em;

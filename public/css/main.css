@@ -11,6 +11,22 @@
 .text-font, .landing-hero .all-containing-container h1, .landing-hero .all-containing-container p, .landing-hero .all-containing-container .buy, .amounts .texty div, .footer {
   font-family: "Open Sans", sans-serif; }
 
+.all-containing-container {
+  box-sizing: border-box;
+  min-width: 100%; }
+  @media (min-width: 0) {
+    .all-containing-container {
+      padding: 0 1em; } }
+  @media (min-width: 500px) {
+    .all-containing-container {
+      padding: 0 5em; } }
+  @media (min-width: 1024px) {
+    .all-containing-container {
+      padding: 0 4em; } }
+  @media (min-width: 1200px) {
+    .all-containing-container {
+      padding: 0 8em; } }
+
 .main-logo {
   color: #f2f2f2;
   align-items: center;
@@ -64,23 +80,23 @@ nav.main {
   display: inline-flex;
   align-items: center;
   margin-left: 1em;
-  transition: 350ms; }
+  transition: 350ms;
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */ }
   .text-button:hover {
-    font-size: 1.5em;
+    background-color: #9b50ff;
+    color: #f2f2f2;
     transition: 350ms; }
-
-.all-containing-container {
-  box-sizing: border-box;
-  min-width: 100%; }
-  @media (min-width: 0) {
-    .all-containing-container {
-      padding: 0 3em; } }
-  @media (min-width: 1024px) {
-    .all-containing-container {
-      padding: 0 4em; } }
-  @media (min-width: 1200px) {
-    .all-containing-container {
-      padding: 0 8em; } }
+  .text-button:active {
+    background-color: #7e1dff;
+    color: #f2f2f2;
+    transition: 150ms; }
 
 .landing-hero {
   width: 100%;
@@ -103,10 +119,10 @@ nav.main {
       @media (min-width: 0) {
         .landing-hero .all-containing-container h1 {
           font-size: 1.5em; } }
-      @media (min-width: 380px) {
+      @media (min-width: 320px) {
         .landing-hero .all-containing-container h1 {
           font-size: 1.25em; } }
-      @media (min-width: 600px) {
+      @media (min-width: 500px) {
         .landing-hero .all-containing-container h1 {
           font-size: 2em; } }
       @media (min-width: 1024px) {
@@ -147,9 +163,9 @@ nav.main {
   @media (min-width: 0) {
     .amounts {
       width: 20em; } }
-  @media (min-width: 600px) {
+  @media (min-width: 500px) {
     .amounts {
-      width: 30em; } }
+      width: 100%; } }
   @media (min-width: 1024px) {
     .amounts {
       width: 40em; } }
@@ -186,11 +202,11 @@ nav.main {
         align-items: center;
         min-width: 0;
         max-width: 100%; } }
-    @media (min-width: 600px) {
+    @media (min-width: 500px) {
       .footer .all-containing-container,
       .footer .good-for-tablet {
         min-width: 0;
-        max-width: 70%; } }
+        max-width: 100%; } }
     @media (min-width: 1024px) {
       .footer .all-containing-container,
       .footer .good-for-tablet {
@@ -257,7 +273,7 @@ nav.main {
   background-color: #2b1860;
   border-radius: 1em;
   border-color: rgba(242, 242, 242, 0.8);
-  margin-top: 10px;
+  margin-top: 1.2em;
   margin-bottom: 10px;
   margin-right: 0;
   padding: 0.3em 1em 0.3em 1em;

@@ -1,7 +1,9 @@
 {
   "scripts": {
     "css": "node-sass --include-path scss scss/main.scss   public/css/main.css",
-    "watch": "nodemon -e scss -x \"yarn css\""
+    "no-animations": "node-sass --include-path scss scss/main-no-animations.scss   public/css/main-no-animations.css",
+    "dev": "nodemon -e scss -x \"yarn css\"",
+    "dev-na": "nodemon -e scss -x \"yarn no-animations\""
   },
   "dependencies": {
     "node-sass": "^5.0.0",
