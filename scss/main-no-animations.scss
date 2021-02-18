@@ -1,0 +1,389 @@
+// breakpoint documentation: http://breakpoint-sass.com/
+@import "./breakpoint/_breakpoint.scss";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Open+Sans:wght@400;600&display=swap");
+
+$memeunity-white: #f2f2f2;
+
+$memeunity-purple: #9b50ff;
+$memeunity-darkpurple: #6004db;
+$memeunity-violet: #230026;
+
+$memeunity-black: #0a0a0a;
+$memeunity-gray: #372050;
+$memeunity-darkgray: #130b1e;
+
+$dark-memeunity-purple: #311457;
+
+$carpet-blue: #190e37;
+
+$dark-purple: #452057;
+
+$phantasma-blue: #17b1e8;
+$transparent-purple: rgba($memeunity-purple, 0.8);
+
+$mobile: 500px;
+$desktop: 15000px;
+$tablet: 1024px;
+$small-mobile: 320px;
+$small-tablet: 700px;
+$small-desktop: 1440px;
+
+$badass: #bada55;
+
+.app {
+  display: flex;
+  flex-direction: column;
+  background-color: $memeunity-white;
+  height: 100%;
+}
+
+.title-font {
+  font-family: "Montserrat", sans-serif;
+}
+
+.text-font {
+  font-family: "Open Sans", sans-serif;
+}
+
+.all-containing-container {
+  box-sizing: border-box;
+  min-width: 100%;
+  @include breakpoint(0) {
+    padding: 0 1em;
+  }
+  @include breakpoint($mobile) {
+    padding: 0 5em;
+  }
+  @include breakpoint($tablet) {
+    padding: 0 4em;
+  }
+  @include breakpoint(1200px) {
+    padding: 0 8em;
+  }
+}
+
+.main-logo {
+  color: $memeunity-white;
+  align-items: center;
+  display: flex;
+  span {
+    margin-left: 0.5em;
+    @extend .title-font;
+    font-weight: 900;
+    font-size: 1.8em;
+    letter-spacing: 0.1em;
+  }
+  img {
+    margin-bottom: 0.4em;
+    width: 50px;
+  }
+}
+
+nav.main {
+  .main-logo {
+    max-width: 50px;
+    padding-top: 0.1em;
+  }
+  position: absolute;
+  top: 0;
+  width: 100%;
+  margin: 0;
+  height: 4em;
+  background-color: rgba($memeunity-black, 0.2);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  .all-containing-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .buttons {
+    display: flex;
+    .signup {
+      @include breakpoint(0) {
+        display: none;
+      }
+      display: none;
+      @include breakpoint($tablet) {
+        display: flex;
+      }
+    }
+  }
+}
+
+.text-button {
+  cursor: pointer;
+  @extend .title-font;
+  font-weight: 600;
+  font-size: 1.2em;
+  background-color: $memeunity-white;
+  color: $memeunity-purple;
+  border-radius: 1.5em;
+  padding: 0.5em 2em;
+  height: 1.2em;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 1em;
+  // transition: 350ms;
+  // &:hover {
+  //   background-color: $memeunity-purple;
+  //   color: $memeunity-white;
+  //   transition: 350ms;
+  // }
+  // &:active {
+  //   background-color: darken($memeunity-purple, 10);
+  //   color: $memeunity-white;
+  //   transition: 150ms;
+  // }
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+.landing-hero {
+  width: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url("../images/memeunity-banner.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  height: 800px;
+  .all-containing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: $memeunity-white;
+    h1 {
+      text-shadow: 1px 1px 7px #0a0a0a;
+      margin: 0;
+      line-height: 100%;
+      // margin-bottom: 1em;
+      @extend .text-font;
+      @include breakpoint(0) {
+        font-size: 1.5em;
+      }
+      @include breakpoint($small-mobile) {
+        font-size: 1.25em;
+      }
+      @include breakpoint($mobile) {
+        font-size: 2em;
+      }
+      @include breakpoint($tablet) {
+        font-size: 3em;
+      }
+      span {
+        color: $memeunity-purple;
+      }
+    }
+    p {
+      font-style: italic;
+      @extend .text-font;
+    }
+    .buy {
+      @extend .text-font;
+      box-shadow: 1px 1px 7px rgba(#0a0a0a, 0.5);
+      letter-spacing: 0.05em;
+      color: $memeunity-purple;
+      background-color: #f2f2f2;
+      padding: 1em 2em;
+      border-radius: 5%;
+    }
+  }
+}
+
+.amounts {
+  margin: 3em auto 3em auto;
+  .texty {
+    display: flex;
+    justify-content: space-between;
+    div {
+      font-weight: 600;
+      @extend .text-font;
+    }
+    &.after {
+      margin-top: 5px;
+    }
+    &.before {
+      margin-bottom: 5px;
+    }
+  }
+  .bar {
+    height: 10px;
+    border-radius: 5px;
+    background-color: $memeunity-white;
+  }
+  .progress {
+    height: 100%;
+    background-color: $memeunity-purple;
+    width: 30%;
+    border-radius: 5px;
+  }
+  @include breakpoint(0) {
+    width: 20em;
+  }
+  @include breakpoint($mobile) {
+    width: 100%;
+  }
+  @include breakpoint($tablet) {
+    width: 40em;
+  }
+}
+
+.footer {
+  background-color: $carpet-blue;
+  width: 100%;
+  color: $memeunity-white;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  @include breakpoint(0) {
+    height: 850px;
+  }
+  // @include breakpoint($mobile) {
+  //   height: 700px;
+  // }
+  @include breakpoint($tablet) {
+    height: 400px;
+  }
+  @extend .text-font;
+  h3 {
+    @extend .title-font;
+    font-size: 1.5em;
+    font-weight: 700;
+    margin: 0;
+    margin-top: 0.4em;
+    margin-bottom: 1em;
+  }
+  .main-logo {
+    margin-bottom: 0.8em;
+  }
+  .all-containing-container,
+  .good-for-tablet {
+    @include breakpoint(0) {
+      flex-direction: column;
+      align-items: center;
+      min-width: 0;
+      max-width: 100%;
+    }
+    @include breakpoint($mobile) {
+      min-width: 0;
+      max-width: 100%;
+    }
+    @include breakpoint($tablet) {
+      flex-direction: row;
+      max-width: 100%;
+    }
+    & > div {
+      // border: solid white 1px;
+      text-align: start;
+
+      p,
+      ul {
+        color: rgba($memeunity-white, 0.8);
+        margin: 0;
+        font-size: 0.9em;
+        line-height: 1.6em;
+      }
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+        li {
+          .bullet {
+            color: rgba($memeunity-white, 0.6);
+          }
+          display: flex;
+          a {
+            margin-left: 0.8em;
+          }
+        }
+        li:hover {
+          color: memeunity-white;
+          .bullet {
+            color: rgba($memeunity-white, 0.8);
+          }
+        }
+      }
+      a {
+        text-decoration: dotted;
+        text-align: center;
+        color: rgba($memeunity-white, 0.9);
+      }
+      .social {
+        width: 10em;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin: 1em auto auto auto;
+        // background-color: red;
+        height: 3em;
+        i {
+          // height: 1em;
+          font-size: 2em;
+        }
+      }
+    }
+    display: flex;
+    justify-content: space-between;
+    & > div {
+      @include breakpoint($tablet) {
+        width: 23%;
+      }
+      @include breakpoint(0) {
+        width: 100%;
+      }
+    }
+  }
+}
+
+#footeremail {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: lighten($carpet-blue, 10);
+  border-radius: 1em;
+  border-color: rgba($memeunity-white, 0.8);
+  margin-top: 1.2em;
+  margin-bottom: 10px;
+  margin-right: 0;
+  padding: 0.3em 1em 0.3em 1em;
+  color: $memeunity-white;
+  padding-left: 1em;
+  // &:hover {
+  //   background-color: lighten($carpet-blue, 20);
+  //   border: solid 2px $memeunity-white;
+  // }
+  &:focus {
+    outline: none;
+  }
+}
+
+.emailbutton {
+  box-sizing: border-box;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  width: 100%;
+  padding: 0.3em;
+  border-radius: 1em;
+  border: solid 2px rgba($memeunity-white, 0.8);
+  font-weight: 700;
+  // &:hover {
+  //   background-color: lighten($carpet-blue, 10);
+  //   border: solid 2px $memeunity-white;
+  // }
+  // &:active {
+  //   background-color: $memeunity-white;
+  //   color: $carpet-blue;
+  //   border: solid 2px $carpet-blue;
+  // }
+}
