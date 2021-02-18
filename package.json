@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "css": "node-sass --include-path scss scss/main.scss   public/css/main.css",
+    "watch": "nodemon -e scss -x \"yarn css\""
+  },
+  "dependencies": {
+    "node-sass": "^5.0.0",
+    "nodemon": "^2.0.7"
+  }
+}
