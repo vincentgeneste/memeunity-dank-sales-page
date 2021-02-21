@@ -191,80 +191,63 @@ nav.main {
     margin-bottom: 1em; }
   .footer .main-logo {
     margin-bottom: 0.8em; }
-  .footer .all-containing-container,
-  .footer .good-for-tablet {
+  .footer .all-containing-container {
     display: flex;
     justify-content: space-between; }
     @media (min-width: 0) {
-      .footer .all-containing-container,
-      .footer .good-for-tablet {
+      .footer .all-containing-container {
         flex-direction: column;
         align-items: center;
         min-width: 0;
         max-width: 100%; } }
     @media (min-width: 500px) {
-      .footer .all-containing-container,
-      .footer .good-for-tablet {
+      .footer .all-containing-container {
         min-width: 0;
         max-width: 100%; } }
     @media (min-width: 1024px) {
-      .footer .all-containing-container,
-      .footer .good-for-tablet {
+      .footer .all-containing-container {
+        align-items: flex-start;
         flex-direction: row;
         max-width: 100%; } }
-    .footer .all-containing-container > div,
-    .footer .good-for-tablet > div {
+    .footer .all-containing-container > div {
       text-align: start; }
       .footer .all-containing-container > div p,
-      .footer .all-containing-container > div ul,
-      .footer .good-for-tablet > div p,
-      .footer .good-for-tablet > div ul {
+      .footer .all-containing-container > div ul {
         color: rgba(242, 242, 242, 0.8);
         margin: 0;
         font-size: 0.9em;
         line-height: 1.6em; }
-      .footer .all-containing-container > div ul,
-      .footer .good-for-tablet > div ul {
+      .footer .all-containing-container > div ul {
         list-style-type: none;
         padding-left: 0; }
-        .footer .all-containing-container > div ul li,
-        .footer .good-for-tablet > div ul li {
+        .footer .all-containing-container > div ul li {
           display: flex; }
-          .footer .all-containing-container > div ul li .bullet,
-          .footer .good-for-tablet > div ul li .bullet {
+          .footer .all-containing-container > div ul li .bullet {
             color: rgba(242, 242, 242, 0.6); }
-          .footer .all-containing-container > div ul li a,
-          .footer .good-for-tablet > div ul li a {
+          .footer .all-containing-container > div ul li a {
             margin-left: 0.8em; }
-        .footer .all-containing-container > div ul li:hover,
-        .footer .good-for-tablet > div ul li:hover {
+        .footer .all-containing-container > div ul li:hover {
           color: memeunity-white; }
-          .footer .all-containing-container > div ul li:hover .bullet,
-          .footer .good-for-tablet > div ul li:hover .bullet {
+          .footer .all-containing-container > div ul li:hover .bullet {
             color: rgba(242, 242, 242, 0.8); }
-      .footer .all-containing-container > div a,
-      .footer .good-for-tablet > div a {
+      .footer .all-containing-container > div a {
         text-decoration: dotted;
         text-align: center;
         color: rgba(242, 242, 242, 0.9); }
-      .footer .all-containing-container > div .social,
-      .footer .good-for-tablet > div .social {
+      .footer .all-containing-container > div .social {
         width: 10em;
         display: flex;
         justify-content: space-around;
         align-items: center;
         margin: 1em auto auto auto;
         height: 3em; }
-        .footer .all-containing-container > div .social i,
-        .footer .good-for-tablet > div .social i {
+        .footer .all-containing-container > div .social i {
           font-size: 2em; }
     @media (min-width: 1024px) {
-      .footer .all-containing-container > div,
-      .footer .good-for-tablet > div {
+      .footer .all-containing-container > div {
         width: 23%; } }
     @media (min-width: 0) {
-      .footer .all-containing-container > div,
-      .footer .good-for-tablet > div {
+      .footer .all-containing-container > div {
         width: 100%; } }
 
 #footeremail {
