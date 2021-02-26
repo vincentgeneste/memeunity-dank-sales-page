@@ -1,42 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Buy Token Now I guess :)</title>
-    <link rel="stylesheet" href="css/normalize/normalize.css" />
-    <link rel="stylesheet" href="css/main.css" />
-  </head>
-  <body>
-    <div class="app">
-      <nav class="main">
-        <div class="all-containing-container">
-          <div class="main-logo title-font">
-            <img src="images/White Mask.png" alt="MemeUnity White Mask Logo" />
-            <span>Dank</span>
-          </div>
-          <div class="buttons">
-            <div class="text-button signup">Sign up</div>
-            <div class="text-button">Log in</div>
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buy Token Now I guess :)</title>
+  <link rel="stylesheet" href="css/normalize/normalize.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="icon" href="../public/images/DANK.png" />
+</head>
+
+<body>
+  <div class="app">
+    <nav class="main">
+      <div class="all-containing-container">
+        <div class="main-logo title-font">
+          <img src="images/White Mask.png" alt="MemeUnity White Mask Logo" />
+          <span>Dank</span>
         </div>
-      </nav>
-      <div class="landing-hero">
-        <div class="all-containing-container">
-          <h1>Our Pre-Sale Is <span>Live!</span></h1>
-          <p>Buckle up, we're about to reach the dank moon at 50% discount.</p>
-          <!-- prettier-ignore -->
-          <div class="amounts">
-            <div class="texty before"><div>Reached: $327,000</div><div>$12,000,000</div></div>
-            <div class="bar"><div class="progress"></div></div>
-            <div class="texty after"><div>Softcap</div><div>Hardcap</div></div>
-          </div>
-          <div class="text-button">Buy now</div>
-          <!-- <h1>The world we know is at an end.</h1>
-          <div class="text-button">Buy now</div> -->
+        <div class="buttons">
+          <!--<div class="text-button signup">Sign up</div>-->
+          <div class="text-button" onclick="login()">Log in</div>
         </div>
       </div>
-      <!-- <div class="mailing-hero">
+    </nav>
+    <div class="landing-hero">
+      <div class="all-containing-container">
+        <h1>Our Pre-Sale Is <span>Live!</span></h1>
+        <p>Buckle up, we're about to reach the dank moon at 50% discount.</p>
+        <!-- prettier-ignore -->
+        <div class="amounts">
+          <div class="texty before">
+            <div>Reached: $327,000</div>
+            <div>$12,000,000</div>
+          </div>
+          <div class="bar">
+            <div class="progress"></div>
+          </div>
+          <div class="texty after">
+            <div>Softcap</div>
+            <div>Hardcap</div>
+          </div>
+        </div>
+        <div class="text-button" onclick="login()">Buy now</div>
+        <!-- <h1>The world we know is at an end.</h1>
+          <div class=" text-button">Buy now</div> -->
+      </div>
+    </div>
+    <!-- <div class="mailing-hero">
         <div class="all-containing-container">
           <h1>A wild newsletter has appeared</h1>
           <div class="mailer">
@@ -58,7 +70,7 @@
         </div>
       </div> -->
 
-      <!-- <div class="mailing-hero2">
+    <!-- <div class="mailing-hero2">
         <div class="all-containing-container">
           <div class="contained-mailer card-5">
             <h1>A wild newsletter has appeared</h1>
@@ -87,86 +99,104 @@
           </div>
         </div>
       </div> -->
-      <div class="footer">
-        <div class="all-containing-container">
-          <div>
-            <div class="main-logo title-font">
-              <img
-                src="images/White Mask.png"
-                alt="MemeUnity White Mask Logo"
-              />
-              <span>Dank</span>
-            </div>
-            <p>
-              When the time comes, you will be the first to hear from us, since
-              we are making every effort possible to get to you. Soon we will
-              have your address and we will send you a postcard.
-            </p>
-            <!-- <ul class="social links">
+    <div class="footer">
+      <div class="all-containing-container">
+        <div>
+          <div class="main-logo title-font">
+            <img src="images/White Mask.png" alt="MemeUnity White Mask Logo" />
+            <span>Dank</span>
+          </div>
+          <p>
+            When the time comes, you will be the first to hear from us, since
+            we are making every effort possible to get to you. Soon we will
+            have your address and we will send you a postcard.
+          </p>
+          <!-- <ul class="social links">
               <li><i class="fab fa-discord"></i></li>
               <li>
                 <i class="fab fa-telegram"></i>
               </li>
             </ul> -->
-          </div>
-          <div>
-            <h3>Additional Links</h3>
-            <ul class="links">
-              <li>
-                <span class="bullet"><i class="fas fa-link"></i></span>
-                <a href="#">Token sales</a>
-              </li>
-              <li>
-                <span class="bullet"><i class="fas fa-link"></i></span>
-                <a href="#">Roadmap</a>
-              </li>
-              <li>
-                <span class="bullet"><i class="fas fa-link"></i></span>
-                <a href="#">What is Dank Token</a>?
-              </li>
-              <li>
-                <span class="bullet"><i class="fas fa-link"></i></span>
-                <a href="#">Why/How</a>?
-              </li>
-              <li>
-                <span class="bullet"><i class="fas fa-link"></i></span>
-                <a href="#">Phantasma Wallet</a>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3>Contact us</h3>
-            <p>
-              If you want to talk with us, just join our Telegram or Discord and
-              talk to the team. We're always there with the lads and lasses.
-            </p>
-            <ul class="social links">
-              <li><i class="fab fa-discord"></i></li>
-              <li>
-                <i class="fab fa-telegram"></i>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <h3>A wild newsletter</h3>
-            <p>
-              Listen to our tales of woe and glory and stay in touch with the
-              latest memes! Your info will remain safe. ☺️
-            </p>
-            <input
-              type="email"
-              name="footeremail"
-              id="footeremail"
-              placeholder="email address"
-            />
-            <div class="emailbutton">Stay on top of the memes</div>
-          </div>
+        </div>
+        <div>
+          <h3>Additional Links</h3>
+          <ul class="links">
+            <li>
+              <span class="bullet"><i class="fas fa-link"></i></span>
+              <a href="#">Token sales</a>
+            </li>
+            <li>
+              <span class="bullet"><i class="fas fa-link"></i></span>
+              <a href="#">Roadmap</a>
+            </li>
+            <li>
+              <span class="bullet"><i class="fas fa-link"></i></span>
+              <a href="#">What is Dank Token</a>?
+            </li>
+            <li>
+              <span class="bullet"><i class="fas fa-link"></i></span>
+              <a href="#">Why/How</a>?
+            </li>
+            <li>
+              <span class="bullet"><i class="fas fa-link"></i></span>
+              <a href="#">Phantasma Wallet</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact us</h3>
+          <p>
+            If you want to talk with us, just join our Telegram or Discord and
+            talk to the team. We're always there with the lads and lasses.
+          </p>
+          <ul class="social links">
+            <li><i class="fab fa-discord"></i></li>
+            <li>
+              <i class="fab fa-telegram"></i>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3>A wild newsletter</h3>
+          <p>
+            Listen to our tales of woe and glory and stay in touch with the
+            latest memes! Your info will remain safe. ☺️
+          </p>
+          <input type="email" name="footeremail" id="footeremail" placeholder="email address" />
+          <div class="emailbutton">Stay on top of the memes</div>
         </div>
       </div>
     </div>
-    <script
-      src="https://kit.fontawesome.com/619d83b485.js"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  </div>
+  <div id="alert-area" class="alert-area"></div>
+  <div id="phantasmaError" class="modal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="bootbox-close-button close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h4 class="modal-title">Phantasma Link Error</h4>
+        </div>
+        <div class="modal-body">
+          <p>We were unable to connect to a Phantasma wallet. If you have a compatible wallet installed, make sure it is
+            open and connected to an account in the background.</p>
+          <p>Otherwise, please install one of the following:
+          <ul>
+            <li><a href="https://github.com/Relfos/Poltergeist/releases" target="_blank">Poltergeist</a></li>
+          </ul>
+          </p>
+          <p>Once installed, open it then press the Retry button.</p>
+        </div>
+        <div class="modal-footer" id="retry-link">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/jquery@3.3.1/dist/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://kit.fontawesome.com/619d83b485.js" crossorigin="anonymous"></script>
+  <script src="../public/js/phantasma.js"></script>
+  <script src="../public/js/main.js"></script>
+</body>
+
 </html>
