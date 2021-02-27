@@ -304,7 +304,7 @@ class PhantasmaLink {
         this.createSocket();
     }
 
-    signTx(script, payload) {
+    signTx(script, payload, callback) {
 
         console.log(script)
 
@@ -339,7 +339,8 @@ class PhantasmaLink {
         }
         this.sendLinkRequest('signTx/mainnet/main/' + script + '/' + payload, function (result) {
 
-            if (result.success) {
+            callback(result);
+            if (result.success && !result.hash.error) {
                 alertbox.show('Transaction successful, hash: ' + result.hash);
                 console.log('Transaction successful, hash: ' + result.hash);
             }

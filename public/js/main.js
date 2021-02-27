@@ -1,6 +1,17 @@
+var softcap = 250000;
+var hardcap = 600000;
+
 $(document).ready(function () {
 
+    var reached = 0;
 
+    // calculate progress
+    $(".progress").css("width", (100 * reached) / hardcap + "%");
+
+    // set softcap pos
+    $("#softcap-mark").css("left", (100 * softcap) / hardcap + "%");
+    $("#reached").html(numberWithCommas(reached, 0));
+    $("#hardcap").html(numberWithCommas(hardcap, 0));
 });
 
 function login() {
@@ -37,7 +48,7 @@ function login() {
             }
 
             contentBootbox = 'Connected wallet: ' + linkName + ' • ' + formatAddressShort(linkAddress)
-                + '<br>SOUL balance: ' + numberWithCommas(linkBalSOUL) + ' SOUL'
+                + '<br>SOUL balance: ' + parseFloat(linkBalSOUL).toFixed(0) + ' SOUL'
                 + '<br><br>How much SOUL do you want to contribute to the sale?'
                 + '<br><br><input type="text" class="form-control" name="amountsale" id="amountsale"><br>'
                 + "Note: you have to be whitelisted with your address or your transaction will be refunded."
@@ -96,10 +107,14 @@ function formatAddressShort(address) {
 
 }
 
-function numberWithCommas(x) {
-
+function numberWithCommas(x, decimals) {
+    decimals = typeof decimals == "undefined" ? 2 : decimals;
     var parts = x.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    if (decimals == 0) 
+        return parts[0];
+    if (parts.length > 1 && parts[1].length > decimals)
+        return parts[0] + "." + parts[1].substr(0, decimals);
     return parts.join(".")
 
 }
@@ -129,27 +144,37 @@ function send(sendAmount) {
         .callContract('gas', 'SpendGas', [linkAddress])
         .endScript();
 
-    link.signTx(script, null);
+    link.signTx(script, null, function (result) {
+        console.log('result signTx', result)
 
-    setTimeout(function () {
+        if (result.error || result.hash.error) {
+            var error = result.error ? result.error : result.hash.error;
+            console.log(error)
+            bootbox.alert('Error: ' + error);
+        }
+        else if (result.success) {
+            var hash = result.hash;
 
-        $.get('https://seed.ghostdevs.com:7078/api/getTransaction?hashText=' + hash,
-            function (returnedDataTX) {
+            setTimeout(function() {
+                $.get('https://seed.ghostdevs.com:7078/api/getTransaction?hashText=' + hash,
+                    function (res) {                        
+                        console.log(res)
+                        res = JSON.parse(res);
+                        if (
+                            res &&
+                            res.error &&
+                            res.error !== 'pending'
+                        ) {
+                            console.log(res.error)
+                            bootbox.alert('error: ' + res.error);
+                        } else {
+                            console.log('tx successful: ', res.hash)
+                            bootbox.alert('success, tx hash: ' + res.hash);
+                        }
+                    })
+                }, 2000);
+        }
 
-                console.log(returnedDataTX)
-                if (
-                    response.data &&
-                    response.data.error &&
-                    response.data.error !== 'pending'
-                ) {
-                    console.log(response.data.error)
-                    bootbox.alert('error: ' + response.data.error);
-                } else {
-                    console.log('tx successful: ', res.hash)
-                    bootbox.alert('success, tx hash: ' + res.hash);
-                }
-            })
-
-    }, 1000)
+    })
 
 }

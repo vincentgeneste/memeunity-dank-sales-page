@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="css/normalize/normalize.css" />
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <link rel="icon" href="../public/images/DANK.png" />
+  <link rel="icon" href="images/DANK.png" />
 </head>
 
 <body>
@@ -32,11 +32,12 @@
         <!-- prettier-ignore -->
         <div class="amounts">
           <div class="texty before">
-            <div>Reached: $327,000</div>
-            <div>$12,000,000</div>
+            <div>Reached: <span id="reached">0</span> SOUL</div>
+            <div><span id="hardcap"></span> SOUL</div>
           </div>
-          <div class="bar">
-            <div class="progress"></div>
+          <div class="bar" style="position: relative">
+            <div class="progress" style="position: absolute"></div>
+            <div id="softcap-mark" style="height:100%; width: 2px; position:absolute; left: 50%; background-color:white"></div>
           </div>
           <div class="texty after">
             <div>Softcap</div>
@@ -195,8 +196,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <script src="https://kit.fontawesome.com/619d83b485.js" crossorigin="anonymous"></script>
-  <script src="../public/js/phantasma.js"></script>
-  <script src="../public/js/main.js"></script>
+  <script src="js/phantasma.js"></script>
+  <script src="js/main.js"></script>
 </body>
 
 </html>
