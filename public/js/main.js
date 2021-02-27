@@ -62,12 +62,12 @@ function login() {
                         results = {};
                         results.fieldname1 = dialog[0].querySelector("[name=amountsale]").value;
                         sendAmount = results.fieldname1
-                        if (sendAmount < 1) {
-                            bootbox.alert('Amount too low!<br>You need to participate with at least 1 SOUL');
+                        if (sendAmount < 1250) {
+                            bootbox.alert('Amount too low!<br>You need to participate with at least 1,250 SOUL');
                             return;
                         }
-                        if (sendAmount > 10000) {
-                            bootbox.alert('Amount too high!<br>You can participate only up to 10,000 SOUL');
+                        if (sendAmount > 60000) {
+                            bootbox.alert('Amount too high!<br>You can participate only up to 60,000 SOUL');
                             return;
                         }
 
