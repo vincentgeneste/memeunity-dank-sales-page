@@ -1,16 +1,40 @@
 var softcap = 250000;
 var hardcap = 600000;
 
-$(document).ready(function () {
+const contractAddress = 'P2K43AZNup3nBhZUSBzX81sQU41GRUC9bHXXZmWE5AhZDQn'
 
+$(document).ready(function () {
     var reached = 0;
+
+    $.get('https://seed.ghostdevs.com:7078/api/getAccount?account=' + contractAddress,
+    function (res) {                        
+        res = JSON.parse(res);
+        if (res && res.error) {
+            console.log(res.error)
+        } else {
+            var soulBalance = res.balances.find(b => b.symbol == 'SOUL');
+            if (soulBalance) {
+                var amount = soulBalance.amount;
+                var decimals = 8;
+                while (amount.length < decimals + 1) amount = "0" + amount;            
+                reached = parseInt(amount.substring(0, amount.length - decimals));
+                $("#reached").html(numberWithCommas(reached, 0));
+
+                // calculate progress
+                var progress = (100 * reached) / hardcap;
+                if (progress > 100)
+                    progress = 100;
+                $(".progress").css("width",  progress.toFixed(3)+ "%");
+
+            }
+        }
+    });
 
     // calculate progress
     $(".progress").css("width", (100 * reached) / hardcap + "%");
 
     // set softcap pos
     $("#softcap-mark").css("left", (100 * softcap) / hardcap + "%");
-    $("#reached").html(numberWithCommas(reached, 0));
     $("#hardcap").html(numberWithCommas(hardcap, 0));
 });
 
@@ -121,7 +145,6 @@ function numberWithCommas(x, decimals) {
 
 function send(sendAmount) {
 
-    const contractAddress = 'P2K43AZNup3nBhZUSBzX81sQU41GRUC9bHXXZmWE5AhZDQn'
     const assetSymbol = 'SOUL'
     const gasPrice = 100000;
     const minGasLimit = 2100;
