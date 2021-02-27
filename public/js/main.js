@@ -7,28 +7,28 @@ $(document).ready(function () {
     var reached = 0;
 
     $.get('https://seed.ghostdevs.com:7078/api/getAccount?account=' + contractAddress,
-    function (res) {                        
-        res = JSON.parse(res);
-        if (res && res.error) {
-            console.log(res.error)
-        } else {
-            var soulBalance = res.balances.find(b => b.symbol == 'SOUL');
-            if (soulBalance) {
-                var amount = soulBalance.amount;
-                var decimals = 8;
-                while (amount.length < decimals + 1) amount = "0" + amount;            
-                reached = parseInt(amount.substring(0, amount.length - decimals));
-                $("#reached").html(numberWithCommas(reached, 0));
+        function (res) {
+            res = JSON.parse(res);
+            if (res && res.error) {
+                console.log(res.error)
+            } else {
+                var soulBalance = res.balances.find(b => b.symbol == 'SOUL');
+                if (soulBalance) {
+                    var amount = soulBalance.amount;
+                    var decimals = 8;
+                    while (amount.length < decimals + 1) amount = "0" + amount;
+                    reached = parseInt(amount.substring(0, amount.length - decimals));
+                    $("#reached").html(numberWithCommas(reached, 0));
 
-                // calculate progress
-                var progress = (100 * reached) / hardcap;
-                if (progress > 100)
-                    progress = 100;
-                $(".progress").css("width",  progress.toFixed(3)+ "%");
+                    // calculate progress
+                    var progress = (100 * reached) / hardcap;
+                    if (progress > 100)
+                        progress = 100;
+                    $(".progress").css("width", progress.toFixed(3) + "%");
 
+                }
             }
-        }
-    });
+        });
 
     // calculate progress
     $(".progress").css("width", (100 * reached) / hardcap + "%");
@@ -135,7 +135,7 @@ function numberWithCommas(x, decimals) {
     decimals = typeof decimals == "undefined" ? 2 : decimals;
     var parts = x.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    if (decimals == 0) 
+    if (decimals == 0)
         return parts[0];
     if (parts.length > 1 && parts[1].length > decimals)
         return parts[0] + "." + parts[1].substr(0, decimals);
@@ -178,9 +178,9 @@ function send(sendAmount) {
         else if (result.success) {
             var hash = result.hash;
 
-            setTimeout(function() {
+            setTimeout(function () {
                 $.get('https://seed.ghostdevs.com:7078/api/getTransaction?hashText=' + hash,
-                    function (res) {                        
+                    function (res) {
                         console.log(res)
                         res = JSON.parse(res);
                         if (
@@ -191,11 +191,11 @@ function send(sendAmount) {
                             console.log(res.error)
                             bootbox.alert('error: ' + res.error);
                         } else {
-                            console.log('tx successful: ', res.hash)
-                            bootbox.alert('success, tx hash: ' + res.hash);
+                            console.log('tx successful: ', (res.hash).substring(0, 10))
+                            bootbox.alert('success, tx hash: ' + (res.hash).substring(0, 10));
                         }
                     })
-                }, 2000);
+            }, 2000);
         }
 
     })
