@@ -24,7 +24,7 @@ $(document).ready(function () {
     var reached = 0;
     var sb = new ScriptBuilder();
 
-    var script = sb.callContract('sale', 'GetRaisedAmount', [saleHash]).endScript();
+    var script = sb.callContract('sale', 'GetSoldAmount', [saleHash]).endScript();
     $.getJSON(apiUrl + '/api/invokeRawScript?chainInput=main&scriptData=' + script,
         function (data) {
             console.log("invokeRaw", data);
