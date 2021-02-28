@@ -181,6 +181,7 @@ nav.main {
     }
     p {
       font-style: italic;
+      text-align: center;
       @extend .text-font;
     }
     .buy {
@@ -331,7 +332,8 @@ nav.main {
     justify-content: space-between;
     & > div {
       @include breakpoint($tablet) {
-        width: 23%;
+        // background-color: red;
+        max-width: 23%;
       }
       @include breakpoint(0) {
         width: 100%;

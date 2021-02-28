@@ -131,7 +131,8 @@ nav.main {
       .landing-hero .all-containing-container h1 span {
         color: #9b50ff; }
     .landing-hero .all-containing-container p {
-      font-style: italic; }
+      font-style: italic;
+      text-align: center; }
     .landing-hero .all-containing-container .buy {
       box-shadow: 1px 1px 7px rgba(10, 10, 10, 0.5);
       letter-spacing: 0.05em;
@@ -245,7 +246,7 @@ nav.main {
           font-size: 2em; }
     @media (min-width: 1024px) {
       .footer .all-containing-container > div {
-        width: 23%; } }
+        max-width: 23%; } }
     @media (min-width: 0) {
       .footer .all-containing-container > div {
         width: 100%; } }
