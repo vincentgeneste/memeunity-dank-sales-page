@@ -2,10 +2,10 @@ var softcap = 250000;
 var hardcap = 600000;
 
 const contractAddress = 'P2K43AZNup3nBhZUSBzX81sQU41GRUC9bHXXZmWE5AhZDQn'
-const saleHash = hexToByteArray("9CD67A70693F6B062E9AFD1FEA2B9DC0E4DBAC7BDA2D46FD6BE790F24CD07803");
+const saleHash = hexToByteArray("A799B4AB36A3BB915FC5815681D588E1802D66DB7B213464FEE66AD6B6231038");
 
 function hexToByteArray(hexBytes) {
-    const res = [hexBytes.length / 2];
+    const res = [];
     for (let i = 0; i < hexBytes.length; i += 2) {
         const hexdig = hexBytes.substr(i, 2);
         if (hexdig == "") {
@@ -19,7 +19,6 @@ $(document).ready(function () {
     var reached = 0;
     var sb = new ScriptBuilder();
 
-    //var script = sb.callContract('sale', 'GetSales', paramArray).endScript();
     var script = sb.callContract('sale', 'GetRaisedAmount', [ saleHash ]).endScript();
     $.getJSON('http://testnet.phantasma.io:7078/api/invokeRawScript?chainInput=main&scriptData=' + script,
         function (data) {
