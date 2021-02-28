@@ -1,11 +1,13 @@
-var softcap = 250000;
-var hardcap = 600000;
+var softcap = 800000;
+var hardcap = 2000000;
 
-// const contractAddress = 'P2K43AZNup3nBhZUSBzX81sQU41GRUC9bHXXZmWE5AhZDQn'
-const saleHash = hashToByteArray("9CD67A70693F6B062E9AFD1FEA2B9DC0E4DBAC7BDA2D46FD6BE790F24CD07803");
+const saleHash = hashToByteArray("043D730801A8FDCD17F1E540C08282E91A387FA6236D43A39A10EAA01622BC4D");
+// const saleHash = hashToByteArray("11AF1789D352FB8B9FCB1B787975C5BD93583C253CDB853C63F84A3053D10493");  // testnet sale
 
-const apiUrl = 'http://testnet.phantasma.io:7078'; // 'https://seed.ghostdevs.com:7078'
+// const apiUrl = 'http://testnet.phantasma.io:7078';
+const apiUrl = 'https://seed.ghostdevs.com:7078'
 
+// const apiUrl = 'http://localhost:7078'; 
 
 function hashToByteArray(hexBytes) {
     const res = [];
@@ -19,35 +21,6 @@ function hashToByteArray(hexBytes) {
     res.unshift(hexBytes.length / 2)
     return res;
 }
-
-$(document).ready(function () {
-    var reached = 0;
-    var sb = new ScriptBuilder();
-
-    var script = sb.callContract('sale', 'GetSoldAmount', [saleHash]).endScript();
-    $.getJSON(apiUrl + '/api/invokeRawScript?chainInput=main&scriptData=' + script,
-        function (data) {
-            console.log("invokeRaw", data);
-            var dec = new Decoder(data.result);
-            console.log('type', dec.readByte());
-            reached = dec.readBigInt();
-            console.log('got reached', reached);
-
-            // calculate progress
-            var progress = (100 * reached) / hardcap;
-            if (progress > 100)
-                progress = 100;
-            $(".progress").css("width", progress.toFixed(3) + "%");
-
-        });
-
-    // calculate progress
-    $(".progress").css("width", (100 * reached) / hardcap + "%");
-
-    // set softcap pos
-    $("#softcap-mark").css("left", (100 * softcap) / hardcap + "%");
-    $("#hardcap").html(numberWithCommas(hardcap, 0));
-});
 
 function login() {
 
@@ -108,12 +81,12 @@ function login() {
                         results = {};
                         results.fieldname1 = dialog[0].querySelector("[name=amountsale]").value;
                         sendAmount = results.fieldname1
-                        if (sendAmount < 1250) {
-                            bootbox.alert('Amount too low!<br>You need to participate with at least 1,250 SOUL');
+                        if (sendAmount < 6250/4) {
+                            bootbox.alert('Amount too low!<br>You need to participate with at least 1,563 SOUL');
                             return;
                         }
-                        if (sendAmount > 60000) {
-                            bootbox.alert('Amount too high!<br>You can participate only up to 60,000 SOUL');
+                        if (sendAmount > 312500/4) {
+                            bootbox.alert('Amount too high!<br>You can participate only up to 78,125 SOUL');
                             return;
                         }
 
@@ -165,7 +138,6 @@ function send(sendAmount) {
     // paramArrayTransfer = [linkAddress, contractAddress, assetSymbol, Math.floor(sendAmount * 10 ** 8)];
 
     script = sb.callContract('gas', 'AllowGas', [linkAddress, sb.nullAddress(), gasPrice, minGasLimit])
-        // .callInterop('Runtime.TransferTokens', paramArrayTransfer)
         .callContract("sale", "Purchase", [linkAddress, saleHash, assetSymbol, Math.floor(sendAmount * 10 ** 8)])
         .callContract('gas', 'SpendGas', [linkAddress])
         .endScript();
@@ -182,7 +154,7 @@ function send(sendAmount) {
             var hash = result.hash;
 
             setTimeout(function () {
-                $.get(apiUrl + '/api/getTransaction?hashText=' + hash,
+                $.getJSON(apiUrl + '/api/getTransaction?hashText=' + hash,
                     function (res) {
                         console.log(res)
                         if (
@@ -194,12 +166,40 @@ function send(sendAmount) {
                             bootbox.alert('error: ' + res.error);
                         } else {
                             console.log('tx successful: ', (res.hash).substring(0, 10))
-                            bootbox.alert('success, tx hash: ' + (res.hash).substring(0, 10));
+                            bootbox.alert('Purchase success - tx hash: ' + (res.hash).substring(0, 10));
                         }
                     })
             }, 2000);
         }
 
     })
-
 }
+
+
+var reached = 0;
+var sb = new ScriptBuilder();
+
+var script = sb.callContract('sale', 'GetSoldAmount', [saleHash]).endScript();
+$.getJSON(apiUrl + '/api/invokeRawScript?chainInput=main&scriptData=' + script,
+	function (data) {
+			// debugger;
+		console.log("invokeRaw", data);
+		var dec = new Decoder(data.result);
+		console.log('type', dec.readByte());
+		reached = dec.readBigInt() / 10 ** 18;
+		console.log('got reached', reached);
+
+		// calculate progress
+		var progress = (100 * reached) / hardcap;
+		if (progress > 100)
+			progress = 100;
+		$(".progress").css("width", progress.toFixed(3) + "%");
+        $("#reached").html(numberWithCommas(reached, 0));
+	});
+
+// calculate progress
+$(".progress").css("width", (100 * reached) / hardcap + "%");
+
+// set softcap pos
+$("#softcap-mark").css("left", (100 * softcap) / hardcap + "%");
+$("#hardcap").html(numberWithCommas(hardcap, 0));

@@ -339,7 +339,7 @@ class PhantasmaLink {
         if (script.script) {
             script = script.script
         }
-        this.sendLinkRequest('signTx/testnet/main/' + script + '/' + payload, function (result) {
+        this.sendLinkRequest('signTx/mainnet/main/' + script + '/' + payload, function (result) {
 
             callback(result);
             if (result.success && !result.hash.error) {
