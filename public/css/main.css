@@ -251,23 +251,36 @@ nav.main {
       .footer .all-containing-container > div {
         width: 100%; } }
 
-#footeremail {
+#footername {
+  margin-top: 1.2em; }
+
+.footerform {
   box-sizing: border-box;
   width: 100%;
   background-color: #2b1860;
   border-radius: 1em;
   border-color: rgba(242, 242, 242, 0.8);
-  margin-top: 1.2em;
   margin-bottom: 10px;
   margin-right: 0;
   padding: 0.3em 1em 0.3em 1em;
   color: #f2f2f2;
   padding-left: 1em; }
-  #footeremail:hover {
+  .footerform:hover {
     background-color: #3e2388;
     border: solid 2px #f2f2f2; }
-  #footeremail:focus {
+  .footerform:focus {
     outline: none; }
+
+.success {
+  color: greenyellow;
+  margin-top: 0.3em; }
+
+.invalid {
+  color: orangered;
+  margin-top: 0.3em; }
+
+.hidden {
+  display: none; }
 
 .emailbutton {
   box-sizing: border-box;

@@ -342,13 +342,16 @@ nav.main {
   }
 }
 
-#footeremail {
+#footername {
+  margin-top: 1.2em;
+}
+
+.footerform {
   box-sizing: border-box;
   width: 100%;
   background-color: lighten($carpet-blue, 10);
   border-radius: 1em;
   border-color: rgba($memeunity-white, 0.8);
-  margin-top: 1.2em;
   margin-bottom: 10px;
   margin-right: 0;
   padding: 0.3em 1em 0.3em 1em;
@@ -361,6 +364,20 @@ nav.main {
   &:focus {
     outline: none;
   }
+}
+
+.success {
+  color: greenyellow;
+  margin-top: 0.3em;
+}
+
+.invalid {
+  color: orangered;
+  margin-top: 0.3em;
+}
+
+.hidden {
+  display: none;
 }
 
 .emailbutton {
