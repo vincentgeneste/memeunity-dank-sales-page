@@ -4,8 +4,9 @@ var hardcap = 600000;
 // const contractAddress = 'P2K43AZNup3nBhZUSBzX81sQU41GRUC9bHXXZmWE5AhZDQn'
 const saleHash = hashToByteArray("9CD67A70693F6B062E9AFD1FEA2B9DC0E4DBAC7BDA2D46FD6BE790F24CD07803");
 
-const apiUrl = 'http://testnet.phantasma.io:7078'; // 'https://seed.ghostdevs.com:7078'
+//const apiUrl = 'http://testnet.phantasma.io:7078'; // 'https://seed.ghostdevs.com:7078'
 
+const apiUrl = 'http://localhost:7078'; 
 
 function hashToByteArray(hexBytes) {
     const res = [];
@@ -19,35 +20,6 @@ function hashToByteArray(hexBytes) {
     res.unshift(hexBytes.length / 2)
     return res;
 }
-
-$(document).ready(function () {
-    var reached = 0;
-    var sb = new ScriptBuilder();
-
-    var script = sb.callContract('sale', 'GetSoldAmount', [saleHash]).endScript();
-    $.getJSON(apiUrl + '/api/invokeRawScript?chainInput=main&scriptData=' + script,
-        function (data) {
-            console.log("invokeRaw", data);
-            var dec = new Decoder(data.result);
-            console.log('type', dec.readByte());
-            reached = dec.readBigInt();
-            console.log('got reached', reached);
-
-            // calculate progress
-            var progress = (100 * reached) / hardcap;
-            if (progress > 100)
-                progress = 100;
-            $(".progress").css("width", progress.toFixed(3) + "%");
-
-        });
-
-    // calculate progress
-    $(".progress").css("width", (100 * reached) / hardcap + "%");
-
-    // set softcap pos
-    $("#softcap-mark").css("left", (100 * softcap) / hardcap + "%");
-    $("#hardcap").html(numberWithCommas(hardcap, 0));
-});
 
 function login() {
 
@@ -201,5 +173,33 @@ function send(sendAmount) {
         }
 
     })
-
 }
+
+
+var reached = 0;
+var sb = new ScriptBuilder();
+
+var script = sb.callContract('sale', 'GetSoldAmount', [saleHash]).endScript();
+$.getJSON(apiUrl + '/api/invokeRawScript?chainInput=main&scriptData=' + script,
+	function (data) {
+			debugger;
+		console.log("invokeRaw", data);
+		var dec = new Decoder(data.result);
+		console.log('type', dec.readByte());
+		reached = dec.readBigInt();
+		console.log('got reached', reached);
+
+		// calculate progress
+		var progress = (100 * reached) / hardcap;
+		if (progress > 100)
+			progress = 100;
+		$(".progress").css("width", progress.toFixed(3) + "%");
+
+	});
+
+// calculate progress
+$(".progress").css("width", (100 * reached) / hardcap + "%");
+
+// set softcap pos
+$("#softcap-mark").css("left", (100 * softcap) / hardcap + "%");
+$("#hardcap").html(numberWithCommas(hardcap, 0));
