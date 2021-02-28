@@ -2,16 +2,21 @@ var softcap = 250000;
 var hardcap = 600000;
 
 const contractAddress = 'P2K43AZNup3nBhZUSBzX81sQU41GRUC9bHXXZmWE5AhZDQn'
-const saleHash = hexToByteArray("A799B4AB36A3BB915FC5815681D588E1802D66DB7B213464FEE66AD6B6231038");
+const saleHash = hashToByteArray("9CD67A70693F6B062E9AFD1FEA2B9DC0E4DBAC7BDA2D46FD6BE790F24CD07803");
 
-function hexToByteArray(hexBytes) {
-    const res = [];
+const apiUrl = 'http://testnet.phantasma.io:7078'; // 'https://seed.ghostdevs.com:7078'
+
+
+function hashToByteArray(hexBytes) {
+    const res = [ ];
     for (let i = 0; i < hexBytes.length; i += 2) {
         const hexdig = hexBytes.substr(i, 2);
         if (hexdig == "") {
-        res.push(0);
-        } else res.push(parseInt(hexdig, 16));
+        res.unshift(0);
+        } else res.unshift(parseInt(hexdig, 16));
     }
+
+    res.unshift(hexBytes.length/2)
     return res;
 }
 
@@ -20,7 +25,7 @@ $(document).ready(function () {
     var sb = new ScriptBuilder();
 
     var script = sb.callContract('sale', 'GetRaisedAmount', [ saleHash ]).endScript();
-    $.getJSON('http://testnet.phantasma.io:7078/api/invokeRawScript?chainInput=main&scriptData=' + script,
+    $.getJSON(apiUrl +'/api/invokeRawScript?chainInput=main&scriptData=' + script,
         function (data) {
             console.log("invokeRaw", data);
             var dec = new Decoder(data.result);
@@ -186,7 +191,7 @@ function send(sendAmount) {
             var hash = result.hash;
 
             setTimeout(function () {
-                $.get('https://seed.ghostdevs.com:7078/api/getTransaction?hashText=' + hash,
+                $.get(apiUrl + '/api/getTransaction?hashText=' + hash,
                     function (res) {
                         console.log(res)
                         res = JSON.parse(res);
