@@ -1,12 +1,12 @@
-var softcap = 250000;
-var hardcap = 600000;
+var softcap = 800000;
+var hardcap = 2000000;
 
-// const contractAddress = 'P2K43AZNup3nBhZUSBzX81sQU41GRUC9bHXXZmWE5AhZDQn'
-const saleHash = hashToByteArray("9CD67A70693F6B062E9AFD1FEA2B9DC0E4DBAC7BDA2D46FD6BE790F24CD07803");
+const saleHash = hashToByteArray("043D730801A8FDCD17F1E540C08282E91A387FA6236D43A39A10EAA01622BC4D");
 
-//const apiUrl = 'http://testnet.phantasma.io:7078'; // 'https://seed.ghostdevs.com:7078'
+//const apiUrl = 'http://testnet.phantasma.io:7078'; // 
+const apiUrl = 'https://seed.ghostdevs.com:7078'
 
-const apiUrl = 'http://localhost:7078'; 
+// const apiUrl = 'http://localhost:7078'; 
 
 function hashToByteArray(hexBytes) {
     const res = [];
@@ -80,12 +80,12 @@ function login() {
                         results = {};
                         results.fieldname1 = dialog[0].querySelector("[name=amountsale]").value;
                         sendAmount = results.fieldname1
-                        if (sendAmount < 1250) {
-                            bootbox.alert('Amount too low!<br>You need to participate with at least 1,250 SOUL');
+                        if (sendAmount < 2083) {
+                            bootbox.alert('Amount too low!<br>You need to participate with at least 2,083 SOUL');
                             return;
                         }
-                        if (sendAmount > 60000) {
-                            bootbox.alert('Amount too high!<br>You can participate only up to 60,000 SOUL');
+                        if (sendAmount > 104166) {
+                            bootbox.alert('Amount too high!<br>You can participate only up to 104,166 SOUL');
                             return;
                         }
 
@@ -182,7 +182,7 @@ var sb = new ScriptBuilder();
 var script = sb.callContract('sale', 'GetSoldAmount', [saleHash]).endScript();
 $.getJSON(apiUrl + '/api/invokeRawScript?chainInput=main&scriptData=' + script,
 	function (data) {
-			debugger;
+			// debugger;
 		console.log("invokeRaw", data);
 		var dec = new Decoder(data.result);
 		console.log('type', dec.readByte());
