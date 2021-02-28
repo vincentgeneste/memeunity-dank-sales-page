@@ -204,7 +204,9 @@ class ScriptBuilder {
                         let bytes = this.rawString(obj.toString());
                         this.emitLoadEx(reg, bytes, this.VMType_String());
                     }
-                    else {
+                    else if (typeof obj === 'object') {
+                        this.emitLoadEx(reg, obj, this.VMType_Bytes());        
+                    } else {
                         throw "unsupported or uniplemented type";
                     }
 

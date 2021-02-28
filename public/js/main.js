@@ -2,32 +2,39 @@ var softcap = 250000;
 var hardcap = 600000;
 
 const contractAddress = 'P2K43AZNup3nBhZUSBzX81sQU41GRUC9bHXXZmWE5AhZDQn'
+const saleHash = hexToByteArray("9CD67A70693F6B062E9AFD1FEA2B9DC0E4DBAC7BDA2D46FD6BE790F24CD07803");
+
+function hexToByteArray(hexBytes) {
+    const res = [hexBytes.length / 2];
+    for (let i = 0; i < hexBytes.length; i += 2) {
+        const hexdig = hexBytes.substr(i, 2);
+        if (hexdig == "") {
+        res.push(0);
+        } else res.push(parseInt(hexdig, 16));
+    }
+    return res;
+}
 
 $(document).ready(function () {
     var reached = 0;
+    var sb = new ScriptBuilder();
 
-    $.get('https://seed.ghostdevs.com:7078/api/getAccount?account=' + contractAddress,
-        function (res) {
-            res = JSON.parse(res);
-            if (res && res.error) {
-                console.log(res.error)
-            } else {
-                var soulBalance = res.balances.find(b => b.symbol == 'SOUL');
-                if (soulBalance) {
-                    var amount = soulBalance.amount;
-                    var decimals = 8;
-                    while (amount.length < decimals + 1) amount = "0" + amount;
-                    reached = parseInt(amount.substring(0, amount.length - decimals));
-                    $("#reached").html(numberWithCommas(reached, 0));
+    //var script = sb.callContract('sale', 'GetSales', paramArray).endScript();
+    var script = sb.callContract('sale', 'GetRaisedAmount', [ saleHash ]).endScript();
+    $.getJSON('http://testnet.phantasma.io:7078/api/invokeRawScript?chainInput=main&scriptData=' + script,
+        function (data) {
+            console.log("invokeRaw", data);
+            var dec = new Decoder(data.result);
+            console.log('type', dec.readByte());
+            reached = dec.readBigInt();
+            console.log('got reached', reached);
 
-                    // calculate progress
-                    var progress = (100 * reached) / hardcap;
-                    if (progress > 100)
-                        progress = 100;
-                    $(".progress").css("width", progress.toFixed(3) + "%");
+            // calculate progress
+            var progress = (100 * reached) / hardcap;
+            if (progress > 100)
+                progress = 100;
+            $(".progress").css("width", progress.toFixed(3) + "%");
 
-                }
-            }
         });
 
     // calculate progress
@@ -163,7 +170,8 @@ function send(sendAmount) {
     paramArrayTransfer = [linkAddress, contractAddress, assetSymbol, Math.floor(sendAmount * 10 ** 8)];
 
     script = sb.callContract('gas', 'AllowGas', [linkAddress, sb.nullAddress(), gasPrice, minGasLimit])
-        .callInterop('Runtime.TransferTokens', paramArrayTransfer)
+        // .callInterop('Runtime.TransferTokens', paramArrayTransfer)
+        .callContract("sale", "Purchase", [ linkAddress, saleHash, assetSymbol, Math.floor(sendAmount * 10 ** 8) ])
         .callContract('gas', 'SpendGas', [linkAddress])
         .endScript();
 
