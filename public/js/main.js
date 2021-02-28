@@ -1,22 +1,22 @@
 var softcap = 250000;
 var hardcap = 600000;
 
-const contractAddress = 'P2K43AZNup3nBhZUSBzX81sQU41GRUC9bHXXZmWE5AhZDQn'
+// const contractAddress = 'P2K43AZNup3nBhZUSBzX81sQU41GRUC9bHXXZmWE5AhZDQn'
 const saleHash = hashToByteArray("9CD67A70693F6B062E9AFD1FEA2B9DC0E4DBAC7BDA2D46FD6BE790F24CD07803");
 
 const apiUrl = 'http://testnet.phantasma.io:7078'; // 'https://seed.ghostdevs.com:7078'
 
 
 function hashToByteArray(hexBytes) {
-    const res = [ ];
+    const res = [];
     for (let i = 0; i < hexBytes.length; i += 2) {
         const hexdig = hexBytes.substr(i, 2);
         if (hexdig == "") {
-        res.unshift(0);
+            res.unshift(0);
         } else res.unshift(parseInt(hexdig, 16));
     }
 
-    res.unshift(hexBytes.length/2)
+    res.unshift(hexBytes.length / 2)
     return res;
 }
 
@@ -24,8 +24,8 @@ $(document).ready(function () {
     var reached = 0;
     var sb = new ScriptBuilder();
 
-    var script = sb.callContract('sale', 'GetRaisedAmount', [ saleHash ]).endScript();
-    $.getJSON(apiUrl +'/api/invokeRawScript?chainInput=main&scriptData=' + script,
+    var script = sb.callContract('sale', 'GetRaisedAmount', [saleHash]).endScript();
+    $.getJSON(apiUrl + '/api/invokeRawScript?chainInput=main&scriptData=' + script,
         function (data) {
             console.log("invokeRaw", data);
             var dec = new Decoder(data.result);
@@ -160,22 +160,13 @@ function send(sendAmount) {
     const gasPrice = 100000;
     const minGasLimit = 2100;
 
-    console.log(
-        "sending",
-        Math.floor(sendAmount),
-        " ",
-        assetSymbol,
-        "to",
-        contractAddress
-    );
-
     sb = new ScriptBuilder();
 
-    paramArrayTransfer = [linkAddress, contractAddress, assetSymbol, Math.floor(sendAmount * 10 ** 8)];
+    // paramArrayTransfer = [linkAddress, contractAddress, assetSymbol, Math.floor(sendAmount * 10 ** 8)];
 
     script = sb.callContract('gas', 'AllowGas', [linkAddress, sb.nullAddress(), gasPrice, minGasLimit])
         // .callInterop('Runtime.TransferTokens', paramArrayTransfer)
-        .callContract("sale", "Purchase", [ linkAddress, saleHash, assetSymbol, Math.floor(sendAmount * 10 ** 8) ])
+        .callContract("sale", "Purchase", [linkAddress, saleHash, assetSymbol, Math.floor(sendAmount * 10 ** 8)])
         .callContract('gas', 'SpendGas', [linkAddress])
         .endScript();
 
@@ -194,7 +185,6 @@ function send(sendAmount) {
                 $.get(apiUrl + '/api/getTransaction?hashText=' + hash,
                     function (res) {
                         console.log(res)
-                        res = JSON.parse(res);
                         if (
                             res &&
                             res.error &&

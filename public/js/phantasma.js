@@ -205,7 +205,7 @@ class ScriptBuilder {
                         this.emitLoadEx(reg, bytes, this.VMType_String());
                     }
                     else if (typeof obj === 'object') {
-                        this.emitLoadEx(reg, obj, this.VMType_Bytes());        
+                        this.emitLoadEx(reg, obj, this.VMType_Bytes());
                     } else {
                         throw "unsupported or uniplemented type";
                     }
@@ -339,7 +339,7 @@ class PhantasmaLink {
         if (script.script) {
             script = script.script
         }
-        this.sendLinkRequest('signTx/mainnet/main/' + script + '/' + payload, function (result) {
+        this.sendLinkRequest('signTx/testnet/main/' + script + '/' + payload, function (result) {
 
             callback(result);
             if (result.success && !result.hash.error) {
